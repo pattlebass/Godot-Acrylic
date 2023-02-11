@@ -1,5 +1,7 @@
 # Godot-Acrylic
-An effect similar to Microsoft's [Acrylic material](https://docs.microsoft.com/en-us/windows/apps/design/style/acrylic) achieved in the Godot Engine.
+
+An effect similar to Microsoft's [Acrylic](https://docs.microsoft.com/en-us/windows/apps/design/style/acrylic) and [Mica](https://learn.microsoft.com/en-us/windows/apps/design/style/mica?source=recommendations) materials achieved in Godot 3.
+It works by getting the wallpaper file and bluring it in the engine.
 
 ## Showcase
 
@@ -7,6 +9,5 @@ https://user-images.githubusercontent.com/49322676/164967823-2c217985-0849-481f-
 
 ## Limitations
 
-* Only works on Windows. You have to implement it on other platforms yourself
-* Doesn't have a very good fallback system
-* Doesn't account for other windows (only blurs the background image)
+- Implemented on Windows and Linux, but the fallback system is not great.
+- Doesn't account for other windows (only blurs the background image)
