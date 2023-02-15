@@ -1,7 +1,7 @@
 # Godot-Acrylic
 
-An effect similar to Microsoft's [Acrylic](https://docs.microsoft.com/en-us/windows/apps/design/style/acrylic) and [Mica](https://learn.microsoft.com/en-us/windows/apps/design/style/mica?source=recommendations) materials achieved in Godot 3.
-It works by getting the wallpaper file and bluring it in the engine.
+An effect similar to Microsoft's [Acrylic](https://docs.microsoft.com/en-us/windows/apps/design/style/acrylic) and [Mica](https://learn.microsoft.com/en-us/windows/apps/design/style/mica) materials achieved in Godot 3.
+It works by getting the wallpaper file and blurring it in the engine.
 
 ## Showcase
 
