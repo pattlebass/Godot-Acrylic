@@ -8,11 +8,29 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "TextureRect",
+"class": "AcrylicGlass",
+"language": "GDScript",
+"path": "res://addons/acrylic_glass/acrylic_glass.gd"
+} ]
+_global_script_class_icons={
+"AcrylicGlass": "res://addons/acrylic_glass/icon.svg"
+}
+
 [application]
 
-config/name="Acrylic test"
-run/main_scene="res://main.tscn"
+config/name="Acrylic Glass"
+run/main_scene="res://demo.tscn"
 config/icon="res://icon.png"
+
+[debug]
+
+gdscript/warnings/return_value_discarded=false
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/acrylic_glass/plugin.cfg" )
 
 [physics]
 
