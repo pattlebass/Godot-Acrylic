@@ -14,7 +14,7 @@ export(float, 0, 2, 0.05) var fade_out_duration := 0.1
 
 var decoration_size := Vector2()
 var dir := Directory.new()
-var cache := {"wallpaper_checksum": ""}
+var cache := {"wallpaper_checksum": "", "wallpaper_blur": -1}
 var config := ConfigFile.new()
 
 
@@ -32,7 +32,9 @@ func _ready() -> void:
 		var wallpaper_info := get_wallpaper()
 		var cache_blurred_path: String = "user://acrylic_cache/%s.res" % wallpaper_info.checksum
 		
-		if wallpaper_info.checksum == cache.wallpaper_checksum and dir.file_exists(cache_blurred_path):
+		if wallpaper_info.checksum == cache.wallpaper_checksum \
+				and blur_amount == cache.wallpaper_blur \
+				and dir.file_exists(cache_blurred_path):
 			texture = load(cache_blurred_path)
 		else:
 			dir.remove(cache_blurred_path)
@@ -42,6 +44,7 @@ func _ready() -> void:
 			ResourceSaver.save("user://acrylic_cache/%s.res" % wallpaper_info.checksum, texture)
 			
 			cache.wallpaper_checksum = wallpaper_info.checksum
+			cache.wallpaper_blur = blur_amount
 			save_config()
 	
 	material.set_shader_param("screen_size", OS.get_screen_size())
@@ -99,10 +102,12 @@ func setup_config() -> void:
 		return
 	
 	cache.wallpaper_checksum = config.get_value("cache", "wallpaper_checksum", "")
+	cache.wallpaper_blur = config.get_value("cache", "wallpaper_blur", -1)
 
 
 func save_config() -> void:
 	config.set_value("cache", "wallpaper_checksum", cache.wallpaper_checksum)
+	config.set_value("cache", "wallpaper_blur", cache.wallpaper_blur)
 	config.save("user://acrylic_cache/config.cfg")
 
 
