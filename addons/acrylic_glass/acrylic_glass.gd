@@ -20,7 +20,7 @@ const blur_amount := 50
 @export_range(0, 2, 0.05) var fade_in_duration := 0.1
 @export_range(0, 2, 0.05) var fade_out_duration := 0.1
 
-var cache := {"wallpaper_checksum": ""}
+var cache := {"wallpaper_checksum": "", "wallpaper_blur": -1}
 var config := ConfigFile.new()
 
 
@@ -37,7 +37,11 @@ func _ready() -> void:
 		var wallpaper_info := get_wallpaper()
 		var cache_blurred_path: String = "user://acrylic_cache/%s.res" % wallpaper_info.checksum
 		
-		if wallpaper_info.checksum == cache.wallpaper_checksum and FileAccess.file_exists(cache_blurred_path):
+		if (
+				wallpaper_info.checksum == cache.wallpaper_checksum
+				and cache.wallpaper_blur == blur_amount
+				and FileAccess.file_exists(cache_blurred_path)
+		):
 			texture = load(cache_blurred_path)
 		else:
 			DirAccess.remove_absolute(cache_blurred_path)
@@ -46,6 +50,7 @@ func _ready() -> void:
 			ResourceSaver.save(texture, "user://acrylic_cache/%s.res" % wallpaper_info.checksum)
 			
 			cache.wallpaper_checksum = wallpaper_info.checksum
+			cache.wallpaper_blur = blur_amount
 			save_config()
 	
 	material.set_shader_parameter(&"screen_size", DisplayServer.screen_get_size())
@@ -103,10 +108,12 @@ func setup_config() -> void:
 		return
 	
 	cache.wallpaper_checksum = config.get_value("cache", "wallpaper_checksum", "")
+	cache.wallpaper_blur = config.get_value("cache", "wallpaper_blur", -1)
 
 
 func save_config() -> void:
 	config.set_value("cache", "wallpaper_checksum", cache.wallpaper_checksum)
+	config.set_value("cache", "wallpaper_blur", cache.wallpaper_blur)
 	config.save("user://acrylic_cache/config.cfg")
 
 
