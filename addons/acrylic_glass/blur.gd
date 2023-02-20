@@ -11,11 +11,11 @@ static func fast_blur(img: Image, radius: int) -> Image:
 	var hm: int = h - 1
 	var wh: int = w * h
 	var div: int = radius + radius + 1
-	var r := PoolIntArray()
+	var r := PackedInt32Array()
 	r.resize(wh)
-	var g := PoolIntArray()
+	var g := PackedInt32Array()
 	g.resize(wh)
-	var b := PoolIntArray()
+	var b := PackedInt32Array()
 	b.resize(wh)
 	var rsum: int
 	var gsum: int
@@ -26,21 +26,20 @@ static func fast_blur(img: Image, radius: int) -> Image:
 	var yp: int
 	var yi: int
 	var yw: int
-	var vmin := PoolIntArray()
+	var vmin := PackedInt32Array()
 	vmin.resize(max(w, h))
-	var vmax := PoolIntArray()
+	var vmax := PackedInt32Array()
 	vmax.resize(max(w, h))
-	var pix := PoolIntArray()
+	var pix := PackedInt32Array()
 	pix.resize(w * h)
 	pix.fill(0)
 	
-	img.lock()
 	for x in w:
 		for y in h:
 			# This algorithm uses argb, while Godot's Color uses rgba
 			pix[y * w + x] = img.get_pixel(x, y).to_argb32()
 	
-	var dv := PoolIntArray()
+	var dv := PackedInt32Array()
 	dv.resize(256 * div)
 	for i in 256 * div:
 		dv[i] = (i / div)
@@ -109,6 +108,5 @@ static func fast_blur(img: Image, radius: int) -> Image:
 	for x in w:
 		for y in h:
 			img.set_pixel(x, y, Color(pix[y * w + x]))
-	img.unlock()
 	
 	return img

@@ -1,13 +1,13 @@
-[gd_resource type="Shader" format=2]
+[gd_resource type="Shader" format=3 uid="uid://b64v3genyyvo3"]
 
 [resource]
 code = "shader_type canvas_item;
 
-uniform vec4 tint : hint_color;
+uniform vec4 tint : source_color;
 
-uniform sampler2D noise;
+uniform sampler2D noise: repeat_enable;
 uniform float noise_scale : hint_range(0, 1.0) = 0.2;
-uniform float noise_opacity : hint_range(0, 1.0) = 0.1;
+uniform float noise_opacity : hint_range(0, 1.0) = 0.05;
 
 uniform vec2 pos_on_screen;
 uniform vec2 screen_size;

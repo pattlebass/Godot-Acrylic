@@ -6,22 +6,13 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[ {
-"base": "TextureRect",
-"class": "AcrylicGlass",
-"language": "GDScript",
-"path": "res://addons/acrylic_glass/acrylic_glass.gd"
-} ]
-_global_script_class_icons={
-"AcrylicGlass": "res://addons/acrylic_glass/icon.svg"
-}
+config_version=5
 
 [application]
 
 config/name="Acrylic Glass"
 run/main_scene="res://demo.tscn"
+config/features=PackedStringArray("4.0")
 config/icon="res://icon.png"
 
 [debug]
@@ -30,7 +21,7 @@ gdscript/warnings/return_value_discarded=false
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/acrylic_glass/plugin.cfg" )
+enabled=PackedStringArray("res://addons/acrylic_glass/plugin.cfg")
 
 [physics]
 
