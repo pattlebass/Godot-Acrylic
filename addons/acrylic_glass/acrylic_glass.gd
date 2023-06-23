@@ -78,12 +78,13 @@ func get_wallpaper() -> Dictionary:
 				if err == OK:
 					wallpaper_info.checksum = file.get_md5(i)
 					break
-		"Linux":
+		"X11":
 			var output := []
 			OS.execute("gsettings", ["get", "org.gnome.desktop.background", "picture-uri"], true, output)
-			output[0].replace("file://", "")
-			err = image.load(output[0])
-			wallpaper_info.checksum = file.get_md5(output[0])
+			var filepath: String = output[0]
+			filepath = filepath.replace("file://", "").replace("'", "").strip_edges()
+			err = image.load(filepath)
+			wallpaper_info.checksum = file.get_md5(filepath)
 	
 	if err == OK:
 		wallpaper_info.texture.create_from_image(image)
